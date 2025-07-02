@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>أكورديون باستخدام &lt;details&gt;</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      padding: 30px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+    /* Accordion رأسي */
+    .accordion-vertical details {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+      margin: 10px auto;
+      max-width: 600px;
+      transition: background 0.3s ease;
+    }
+    .accordion-vertical summary {
+      padding: 15px;
+      font-weight: bold;
+      background: #2980b9;
+      color: #fff;
+      cursor: pointer;
+      outline: none;
+      user-select: none;
+    }
+    .accordion-vertical details[open] summary {
+      background: #3498db;
+    }
+    .accordion-vertical details > *:not(summary) {
+      padding: 15px;
+      background: #ecf0f1;
+    }
+
+    /* Accordion أفقي بتفصيل رأسي */
+    .accordion-horizontal {
+      max-width: 1000px;
+      margin: 40px auto;
+    }
+    .accordion-horizontal details {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #2c3e50;
+      color: #fff;
+      margin-bottom: 10px;
+      transition: background 0.3s ease;
+    }
+    .accordion-horizontal summary {
+      padding: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .accordion-horizontal details[open] {
+      background: #2980b9;
+    }
+    .accordion-horizontal details > *:not(summary) {
+      padding: 15px;
+      background: #ecf0f1;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>أكوردين رأسي (details)</h2>
+  <div class="accordion-vertical" id="vertical-accordion">
+    <details>
+      <summary>البند الأول</summary>
+      <p>هذا هو المحتوى الخاص بالبند الأول.</p>
+    </details>
+    <details>
+      <summary>البند الثاني</summary>
+      <p>هذا هو المحتوى الخاص بالبند الثاني.</p>
+    </details>
+    <details>
+      <summary>البند الثالث</summary>
+      <p>هذا هو المحتوى الخاص بالبند الثالث.</p>
+    </details>
+  </div>
+
+  <h2>أكوردين أفقي (details رأسية بتنسيق أفقي)</h2>
+  <div class="accordion-horizontal" id="horizontal-accordion">
+    <details>
+      <summary>معلومات</summary>
+      <p>هذا القسم يحتوي على معلومات عامة يتم عرضها عند الفتح.</p>
+    </details>
+    <details>
+      <summary>إشعارات</summary>
+      <p>هنا تظهر الإشعارات والتنبيهات الخاصة بالمستخدم.</p>
+    </details>
+    <details>
+      <summary>إعدادات</summary>
+      <p>قم بتعديل إعداداتك من هنا، مثل اللغة وكلمة المرور.</p>
+    </details>
+  </div>
+
+  <script>
+    // إغلاق باقي التفاصيل في الرأسي
+    document.querySelectorAll("#vertical-accordion details").forEach((targetDetail) => {
+      targetDetail.addEventListener("toggle", () => {
+        if (targetDetail.open) {
+          document.querySelectorAll("#vertical-accordion details").forEach((detail) => {
+            if (detail !== targetDetail) {
+              detail.removeAttribute("open");
+            }
+          });
+        }
+      });
+    });
+
+    // إغلاق باقي التفاصيل في الأفقي
+    document.querySelectorAll("#horizontal-accordion details").forEach((targetDetail) => {
+      targetDetail.addEventListener("toggle", () => {
+        if (targetDetail.open) {
+          document.querySelectorAll("#horizontal-accordion details").forEach((detail) => {
+            if (detail !== targetDetail) {
+              detail.removeAttribute("open");
+            }
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
